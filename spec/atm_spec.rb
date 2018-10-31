@@ -1,7 +1,7 @@
 require './lib/atm.rb'
 
 describe Atm do
-    let(:account) { instance_double('Account',pin_code: '1234', exp_date: '04/19',account_status: :disabled)}
+    let(:account) { instance_double('Account',pin_code: '1234', exp_date: '04/19',account_status: :deactivated)}
     let(:account_good) { instance_double('Account',pin_code: '1234', exp_date: '04/19',account_status: :active)}
 
     before do

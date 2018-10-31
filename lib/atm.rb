@@ -54,7 +54,7 @@ class Atm
         bills
     end
     def account_status_disabled?(account_status)
-        account_status == :disabled
+        account_status == :deactivated
     end
 
 
