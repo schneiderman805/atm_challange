@@ -1,8 +1,10 @@
 require './lib/account.rb'
 
 describe Account do 
-    let(:account) { instance_double('Account',pin_code: '1234', exp_date: '04/19',account_status: :disabled)}
+    let(:account) { instance_double('Account',pin_code: '1234', exp_date: '04/19',account_status: :deactivated)}
     let(:account_good) { instance_double('Account',pin_code: '1234', exp_date: '04/19',account_status: :active)}
+    let(:person) {instance_double('Person', name: 'Thomas')}
+    subject { described_class.new({owner: person}) }
 
     before do
         allow(account).to receive(:balance).and_return(100)
@@ -25,6 +27,12 @@ describe Account do
     it 'deactivates account using Instance method' do
         subject.deactivate
         expect(subject.account_status).to eq :deactivated
+    end
+    it 'is expected to have an owner' do
+        expect(subject.owner).to eq person
+    end
+    it 'is expected to raise error if no owner is set' do
+        expect {described_class.new }.to raise_error "An Account owner is required"
     end
     
 
