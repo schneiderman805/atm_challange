@@ -25,3 +25,7 @@ User stories:
 >As a Customer              
 >In order to keep my funds secure             
 >I want a secure Pin code & an expiry date on my card that allows only me access to my funds
+
+>As an ATM operator             
+>In order to allow access to active customers             
+>I want to allow withdrawals from only active accounts
