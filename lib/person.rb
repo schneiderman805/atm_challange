@@ -25,23 +25,27 @@ class Person
     end
 
     def deposit(deposit)
-        @account ? deposit_money(deposit) : raise_error 
+        @account ? deposit_money(deposit) : deposit_raise_error 
     end
 
     def deposit_money(deposit)
-
         @cash -= deposit
         @account.balance += deposit
-
     end
 
-    def raise_error
+    def deposit_raise_error
         raise 'No account present'
     end 
 
     def withdraw(attrs = {})
         atm_status = attrs[:atm]
-        atm_status ? true : withdraw_raise_error
+        amount = attrs[:amount]
+        atm_status ? process_withdrawal(amount) : withdraw_raise_error
+    end
+
+    def process_withdrawal(amount)
+        @account.balance -= amount
+        @cash += amount
     end
     def withdraw_raise_error
         raise 'An ATM is required'
