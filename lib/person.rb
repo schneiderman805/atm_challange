@@ -23,5 +23,9 @@ class Person
     def create_account()
         @account = Account.new(owner: self)
     end
+
+    def deposit(deposit)
+        true
+    end
 end
 
