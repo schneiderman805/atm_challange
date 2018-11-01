@@ -6,7 +6,7 @@ class Account
     
     def initialize (attrs = {})
     @pin_code = rand(1000..9999)
-    @balance = 100
+    @balance = 0
     @account_status = :active
     @exp_date = set_expiry_date
     set_owner(attrs[:owner])

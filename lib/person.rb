@@ -25,12 +25,23 @@ class Person
     end
 
     def deposit(deposit)
-        @account ? true : raise_error 
+        @account ? deposit_money(deposit) : raise_error 
+    end
+
+    def deposit_money(deposit)
+
+        @cash -= deposit
+        @account.balance += deposit
+
     end
 
     def raise_error
         raise 'No account present'
     end 
+
+    def withdraw(attrs = {})
+        true
+    end
     
 end
 
