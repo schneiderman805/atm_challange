@@ -1,8 +1,9 @@
 class Person
-    attr_accessor :name
+    attr_accessor :name, :cash
      
     def initialize (attrs = {})
     set_owner(attrs[:name])
+    set_cash(attrs[:cash])
     end
 
     def set_owner(obj)
@@ -10,5 +11,8 @@ class Person
     end
     def missing_name
         raise 'A name is required'
+    end
+    def set_cash(cash)
+        cash == nil ? @cash = 0 : @cash = cash 
     end
 end
