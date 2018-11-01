@@ -48,3 +48,8 @@ As a Customer
 In order to manage my funds
 I need to have a personal account
 ```
+```
+As a ATM operator      
+In order to keep track of our customers     
+We want to assign each account to a separate person
+```
