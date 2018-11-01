@@ -1,5 +1,5 @@
 class Person
-    attr_accessor :name, :cash
+    attr_accessor :name, :cash, :account
      
     def initialize (attrs = {})
     set_owner(attrs[:name])
