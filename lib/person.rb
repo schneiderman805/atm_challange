@@ -40,8 +40,11 @@ class Person
     end 
 
     def withdraw(attrs = {})
-        true
+        atm_status = attrs[:atm]
+        atm_status ? true : withdraw_raise_error
     end
-    
+    def withdraw_raise_error
+        raise 'An ATM is required'
+    end
 end
 
