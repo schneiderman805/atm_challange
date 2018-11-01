@@ -25,7 +25,12 @@ class Person
     end
 
     def deposit(deposit)
-        true
+        @account ? true : raise_error 
     end
+
+    def raise_error
+        raise 'No account present'
+    end 
+    
 end
 
