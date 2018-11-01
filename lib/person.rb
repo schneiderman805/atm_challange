@@ -1,10 +1,11 @@
 class Person
-    attr_accessor :name 
-   def initilize (attrs = {})
+    attr_accessor :name
+     
+    def initialize (attrs = {})
     set_owner(attrs[:name])
+    end
 
-   end
-   def set_owner(obj)
+    def set_owner(obj)
     obj = nil ? '' : @name = obj
-   end
+    end
 end
