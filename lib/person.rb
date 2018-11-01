@@ -1,4 +1,4 @@
-require 'account.rb'
+require './lib/account.rb'
 
 class Person
     attr_accessor :name, :cash, :account
@@ -9,15 +9,11 @@ class Person
     end
 
     def set_owner(obj)
-    obj == nil ? missing_name : @name = obj
-    end
-
-    def missing_name
-        raise 'A name is required'
+    obj == nil ? raise_error('owner') : @name = obj
     end
 
     def set_cash(cash)
-        cash == nil ? @cash = 0 : @cash = cash 
+        @cash = cash || 0
     end
 
     def create_account()
@@ -25,30 +21,40 @@ class Person
     end
 
     def deposit(deposit)
-        @account ? deposit_money(deposit) : deposit_raise_error 
+        @account ? change_account_and_cash_balance('deposit',deposit) : raise_error('account') 
     end
-
-    def deposit_money(deposit)
-        @cash -= deposit
-        @account.balance += deposit
-    end
-
-    def deposit_raise_error
-        raise 'No account present'
-    end 
 
     def withdraw(attrs = {})
-        atm_status = attrs[:atm]
-        amount = attrs[:amount]
-        atm_status ? process_withdrawal(amount) : withdraw_raise_error
+        attrs[:atm] ?  atm = attrs[:atm] : raise_error('ATM')
+        atm_withdrawal = attrs[:amount]
+        pin = attrs[:pin]
+        response = atm.withdraw(atm_withdrawal,pin,@account)
+        response[:status] ? change_account_and_cash_balance('withdrawal',atm_withdrawal) : response
     end
 
-    def process_withdrawal(amount)
-        @account.balance -= amount
-        @cash += amount
+    def change_account_and_cash_balance(cash_movement,amount)
+        case cash_movement
+        when 'deposit'
+            @cash -= amount
+            @account.balance += amount
+        when 'withdrawal'
+            @cash += amount
+        else
+            false
+        end
     end
-    def withdraw_raise_error
-        raise 'An ATM is required'
+
+    def raise_error(source)
+        case source
+        when 'owner'
+            raise 'A name is required'
+        when 'account'
+            raise 'No account present'
+        when 'ATM'
+            raise 'An ATM is required'
+        else
+            false
+        end
     end
 end
 
